@@ -2,12 +2,22 @@
 mqttshot
 ########
 
+
+About
+=====
 mqttshot is a versatile little program for publishing and receiving images over MQTT.
 
 
-********
+Background
+==========
+This was created to support a new feature for mqttwarn_,
+see also https://github.com/jpmens/mqttwarn/issues/284
+
+.. _mqttwarn: https://github.com/jpmens/mqttwarn
+
+
 Examples
-********
+========
 ::
 
     # Run example out of the box
