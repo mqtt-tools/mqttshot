@@ -10,6 +10,10 @@ from collections import OrderedDict
 
 
 def client_factory(broker):
+    """
+    Connect to MQTT broker
+    TODO: Obtain port and timeout from function arguments.
+    """
     client = mqtt.Client()
     client.connect(broker, 1883, 60)
     client.on_publish = on_publish
@@ -22,6 +26,7 @@ def on_publish(srv, userdata, mid):
 
 def publish_rich_media(broker='localhost', topic='testdrive', **kwargs):
 
+    # The MQTT client handle
     client = client_factory(broker)
 
     # The MQTT message
@@ -29,11 +34,8 @@ def publish_rich_media(broker='localhost', topic='testdrive', **kwargs):
 
     # Add multiple fields to message with appropriate encoding
 
-    # The "text" field
-    if 'text' in kwargs:
-        message['text'] = kwargs['text']
-
-    # The "image" field
+    # Special handling for the "image" field:
+    # Acquire image from source and encode with base64
     if 'image' in kwargs and kwargs['image']:
 
         # Acquire image payload from various sources
@@ -56,8 +58,22 @@ def publish_rich_media(broker='localhost', topic='testdrive', **kwargs):
         else:
             raise ValueError('Image {} could not be acquired'.format(image))
 
-        # Encode image to Base64
+        # Encode image to base64
         message['image'] = base64.b64encode(image_payload)
 
-    client.publish(topic, json.dumps(message), 0)
+        del kwargs['image']
+
+    # Propagate all other fields from kwargs verbatim
+    for key, value in kwargs.items():
+        if value is not None:
+            message[key] = value
+
+    # Serialize message to JSON
+    payload = json.dumps(message)
+
+    # Publish to MQTT bus
+    client.publish(topic, payload, 0)
+
+    # Process
     client.loop_forever()
+
