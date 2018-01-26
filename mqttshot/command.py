@@ -46,12 +46,15 @@ def run():
         # Let fields be overridable from command line arguments
         options.update(clean_options)
 
-    # Use reasonable defaults
-    # FIXME: Do this using docopt
-    if 'broker' not in options:
-        options['broker'] = 'localhost'
-    if 'topic' not in options:
-        options['topic'] = 'testdrive'
+    else:
+        # Filter None values
+        options = {key: value for key, value in options.items() if value is not None}
+
+    # Apply reasonable defaults
+    options.setdefault('broker', 'localhost')
+    options.setdefault('topic', 'testdrive')
+    options.setdefault('text', None)
+    options.setdefault('alert', False)
 
     # Publish message to MQTT
     publish_rich_media(
