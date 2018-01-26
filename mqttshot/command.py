@@ -7,26 +7,29 @@ from mqttshot.core import publish_rich_media
 def run():
     """
     Usage:
-      mqttshot [--broker=] --topic= --text= --image= [--alert]
-      mqttshot [--broker= --topic= --text= --image= --alert] --example
-      mqttshot --version
-      mqttshot (-h | --help)
+        mqttshot --topic= --image= [--broker=] [--text=] [--alert]
+        mqttshot --example [--broker= --topic= --text= --image= --alert]
+        mqttshot --version
+        mqttshot (-h | --help)
 
     Examples:
 
-      # Run example out of the box
+      # Run example out of the box: Publish a message with an image
+      # to a MQTT broker running on "localhost" to the topic "testdrive"
       mqttshot --example
 
-      # Send text and image from filesystem to specified topic and also raise the "alert" flag
-      mqttshot --topic='testdrive/myhouse' --text='The house is on fire!' --image='/var/spool/house-on-fire.jpg' --alert
+      # Publish image acquired from filesystem with text from command line argument
+      # to specified topic and also raise the "alert" flag
+      mqttshot --topic='testdrive/home' --text='The house is on fire!' --image='/var/spool/house-on-fire.jpg' --alert
 
-      # Send text and image from STDIN
-      cat test.jpg | mqttshot --topic='testdrive/pipe' --text='An image from STDIN' --image=-
+      # Publish image acquired from STDIN
+      cat test.jpg | mqttshot --topic='testdrive/pipe' --image=-
 
-      # Send text and image from url
-      mqttshot --topic='testdrive/pipe' --text='An image from the Internet' --image='https://images.unsplash.com/photo-1503022932596-500eb8cca2d8?w=100&q=10'
+      # Publish image acquired from HTTP URL
+      mqttshot --topic='testdrive/url' --image='https://images.unsplash.com/photo-1503022932596-500eb8cca2d8?w=100&q=10'
 
     Miscellaneous options:
+
       --version                 Show version information
       -h --help                 Show this screen
     """
