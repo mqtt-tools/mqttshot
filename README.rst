@@ -8,12 +8,34 @@ About
 mqttshot is a versatile little program for publishing and receiving images over MQTT.
 
 
+Features
+========
+- Offer flexible image acquisition from different sources,
+  you can currently choose from File, URL and STDIN.
+- Use base64 for encoding the image, it feels safer than "just binary"
+  and can be used to encapsulate the image into a message container.
+- Use JSON as message container format, as you usually want to send more data along.
+  In the current implementation, the message structure is very simple
+  and not restricted by any schema::
+
+    {
+        "text": "The car is on fire!",
+        "image": "/9j/4AAQSkZJRgAB ... JooA/9k=",
+        "alert": true
+    }
+
+
 Background
 ==========
-This was created to support a new feature for mqttwarn_,
-see also https://github.com/jpmens/mqttwarn/issues/284
+Please consider this as a proposal about a simple convention of how to
+send basic messages containing images over MQTT. We will be happy if
+this of any interest for you and love to hear back from you.
+
+This was built to support the creation of a new feature for mqttwarn_,
+namely `Add support for Pushover image attachments`_.
 
 .. _mqttwarn: https://github.com/jpmens/mqttwarn
+.. _Add support for Pushover image attachments: https://github.com/jpmens/mqttwarn/issues/284
 
 
 Examples
@@ -32,3 +54,35 @@ Examples
     # Send text and image from url
     mqttshot --topic='testdrive/pipe' --text='An image from the Internet' --image='https://images.unsplash.com/photo-1503022932596-500eb8cca2d8?w=100&q=10'
 
+
+References
+==========
+There are other discussions and projects sending and receiving images over MQTT.
+
+Projects
+--------
+- https://github.com/suknuk/MQTT-Images
+- https://play.google.com/store/apps/details?id=it.barbaro.zanzito
+
+Tutorials
+---------
+- How to Send a File Using MQTT Using a Python Script
+  http://www.steves-internet-guide.com/send-file-mqtt/
+
+- Node-RED
+
+    - https://dennisschultz.wordpress.com/2015/06/29/my-internet-of-things-and-mobilefirst-adventure-part-5-adding-in-the-camera/
+    - https://dennisschultz.wordpress.com/2016/02/05/part-7-requesting-and-receiving-a-picture/
+
+- Home Assistant
+
+    - https://home-assistant.io/components/camera.mqtt/
+    - https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/camera/mqtt.py
+    - https://github.com/home-assistant/home-assistant/blob/master/tests/components/camera/test_mqtt.py
+
+- https://community.hortonworks.com/articles/77988/ingest-remote-camera-images-from-raspberry-pi-via.html
+
+Discussions
+-----------
+- https://stackoverflow.com/questions/37499739/how-can-i-send-a-image-by-using-mosquitto
+- https://forum.pycom.io/topic/1133/camera-image-over-mqtt
