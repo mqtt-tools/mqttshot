@@ -78,8 +78,8 @@ Projects
 
 Tutorials
 ---------
-- How to Send a File Using MQTT Using a Python Script
-  http://www.steves-internet-guide.com/send-file-mqtt/
+- | How to Send a File Using MQTT Using a Python Script
+  | http://www.steves-internet-guide.com/send-file-mqtt/
 
 - Node-RED
 
@@ -92,7 +92,9 @@ Tutorials
     - https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/camera/mqtt.py
     - https://github.com/home-assistant/home-assistant/blob/master/tests/components/camera/test_mqtt.py
 
-- https://community.hortonworks.com/articles/77988/ingest-remote-camera-images-from-raspberry-pi-via.html
+- Hortonworks
+
+    - https://community.hortonworks.com/articles/77988/ingest-remote-camera-images-from-raspberry-pi-via.html
 
 Discussions
 -----------
