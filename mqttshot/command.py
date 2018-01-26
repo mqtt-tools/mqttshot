@@ -34,13 +34,6 @@ def run():
     # Read commandline options
     options = normalize_docopt_options(docopt(run.__doc__, version='mqttshot 0.0.0'))
 
-    # Use reasonable defaults
-    # FIXME: Do this using docopt
-    if 'broker' not in options:
-        options['broker'] = 'localhost'
-    if 'topic' not in options:
-        options['topic'] = 'testdrive'
-
     # Either run the example out of the box
     if options['example']:
 
@@ -52,6 +45,13 @@ def run():
 
         # Let fields be overridable from command line arguments
         options.update(clean_options)
+
+    # Use reasonable defaults
+    # FIXME: Do this using docopt
+    if 'broker' not in options:
+        options['broker'] = 'localhost'
+    if 'topic' not in options:
+        options['topic'] = 'testdrive'
 
     # Publish message to MQTT
     publish_rich_media(
