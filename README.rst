@@ -67,6 +67,24 @@ Synopsis
       mqttshot --topic='testdrive/url' --image='https://images.unsplash.com/photo-1503022932596-500eb8cca2d8?w=100&q=10'
 
 
+Setup
+=====
+
+Get source code::
+
+    git clone https://github.com/daq-tools/mqttshot
+    cd mqttshot
+
+Create and activate a Python virtualenv::
+
+    virtualenv .venv27
+    source .venv27/bin/activate
+
+Install `mqttshot` in development mode::
+
+    python setup.py develop
+
+
 References
 ==========
 There are other discussions and projects about sending and receiving images over MQTT.
